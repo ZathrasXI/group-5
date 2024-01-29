@@ -5,3 +5,4 @@ no _ in variable name.
 3. method name: First letter must not be capital, new word must start with a capital
 
 remember the variable name must be related to its' meaning(eg. Button btnStart = new Button());
+remember to leave comments of ur variables.
