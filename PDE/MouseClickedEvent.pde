@@ -1,6 +1,7 @@
 void mouseClicked(){
   if(isMouseInButtonStart()&&gameStatus.curLevel==Level.LEVEL_BEGIN){
     System.out.println("start button is clicked");
+    gameStatus.curLevel = level.LEVEL_MAP1;
   }
   
   if(isMouseInButtonSet()&&gameStatus.curLevel==Level.LEVEL_BEGIN){
@@ -14,6 +15,10 @@ void mouseClicked(){
       System.out.println("settag button is clicked");
       gameStatus.curLevel = Level.LEVEL_SET;
     }
+  }
+  
+  if(gameStatus.curLevel==Level.LEVEL_MAP1){
+    
   }
   
   if(gameStatus.curLevel==Level.LEVEL_SET){

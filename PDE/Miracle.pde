@@ -33,6 +33,9 @@ GameStatus gameStatus;
 //SetPanel
 SetPanel setPanel;
 
+//GameLevel1
+static GameLevel1 gameLevel1;
+
 void setup(){
   //init GameConstant
   gameConstant = new GameConstant(); 
@@ -66,6 +69,9 @@ void setup(){
   //init setPanel
   setPanel = new SetPanel();
   
+  //init gameLevel1
+  gameLevel1 = new GameLevel1();
+  
   size(1024,630);
 }
 
@@ -74,6 +80,7 @@ void draw(){
   //init cursor
   cursor(buttonImage.cursor);
   if(gameStatus.curLevel == Level.LEVEL_BEGIN){
+    gameLevel1 = new GameLevel1();
     // play music
     bgmStart(gameStatus.curLevel);
     imageMode(CORNER);
@@ -89,6 +96,11 @@ void draw(){
     // play music
     bgmStart(gameStatus.curLevel);
     setPanel.createPanel();
+  }
+   if(gameStatus.curLevel == Level.LEVEL_MAP1){
+    // play music
+    bgmStart(gameStatus.curLevel);
+    gameLevel1.startLevel1();
   }
   
  
