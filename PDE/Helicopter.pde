@@ -1,12 +1,30 @@
 class Helicopter extends MoveObject{
-  private int health;
-
+  public int health;
+  public ArrayList<Bullet>bullets;
+  public int curBulletCount = 1000; //to do
+  
   public Helicopter(String imagePath,int curX,int curY,int health,int speed){
     this.curX = curX;
     this.curY = curY;
     this.health = health;
     this.speed = speed;
+    this.bullets = new ArrayList<Bullet>(); 
     image = loadImage(imagePath);
+  }
+  
+  public void initBullets(int count){
+    for(int i=0;i<count;i++){
+      Bullet bullet = new Bullet();
+      bullet.curX = curX;
+      bullet.curY = curY;
+      bullets.add(bullet);
+    }
+  }
+  
+  public void shoot(){
+    if(bullets!=null&&bullets.size()>0){
+      curBulletCount--;
+    }
   }
 
   public void move(boolean isClicked){
@@ -36,5 +54,26 @@ class Helicopter extends MoveObject{
 
   public void lostHealth(){
     health--;
+  }
+  
+  public boolean intersectWithCoin(GoldCoin coin){
+    if(coin.curX+50>=curX&&coin.curX+50<=curX+100&&coin.curY+50>=curY&&coin.curY+50<=curY+100){
+      return true;
+    }
+    return false;
+  }
+  
+  public boolean intersectWithUfo(Ufo ufo){
+    if(ufo.curX+50>=curX&&ufo.curX+50<=curX+100&&ufo.curY+50>=curY&&ufo.curY+50<=curY+100){
+      return true;
+    }
+    return false;
+  }
+  
+  public boolean intersectWithFastCard(FastCard card){
+    if(card.curX+50>=curX&&card.curX+50<=curX+100&&card.curY+50>=curY&&card.curY+50<=curY+100){
+      return true;
+    }
+    return false;
   }
 }

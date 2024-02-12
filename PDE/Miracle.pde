@@ -26,6 +26,8 @@ PImage gameName;
 Minim minim;
 AudioPlayer playerLevelBegin;
 AudioPlayer playerLevelSet;
+AudioPlayer playerLevelMap1;
+AudioPlayer playerBullet1;
 
 //GameStatus
 GameStatus gameStatus;
@@ -50,7 +52,7 @@ void setup(){
   gameName = loadImage("miracle.png");
   
   //init gif 
-  gif = new Gif(this,"background_start1.gif");
+  gif = new Gif(this,"background_start2.gif");
   //backgroundStart = loadImage("background_start.gif");
   gif.play();
   
@@ -62,6 +64,8 @@ void setup(){
   minim = new Minim(this);
   playerLevelBegin = minim.loadFile(Bgm.bgmLevelBegin);
   playerLevelSet = minim.loadFile(Bgm.bgmLevelBegin);
+  playerLevelMap1 = minim.loadFile(Bgm.bgmLevelMap1);
+  playerBullet1 = minim.loadFile(Bgm.bgmBullet1);
   
   //init GameStatus
   gameStatus = new GameStatus();
@@ -72,7 +76,7 @@ void setup(){
   //init gameLevel1
   gameLevel1 = new GameLevel1();
   
-  size(1024,630);
+  size(1125,630);
 }
 
 void draw(){
@@ -90,7 +94,7 @@ void draw(){
     drawButton(level.LEVEL_BEGIN);
     imageMode(CENTER);
     // need to be confirmed(design a function matched with level)
-    image(gameName,gameConstant.MAX_WIDTH/2,gameConstant.MAX_HEIGHT/5,gameName.width,gameName.height);
+    image(gameName,width/2,height/5,gameName.width,gameName.height);
   }
   if(gameStatus.curLevel == Level.LEVEL_SET){
     // play music

@@ -74,9 +74,9 @@ void mouseClicked(){
 }
 
 boolean isMouseInButtonStart(){
-  return mouseX>=gameConstant.MAX_WIDTH/2-buttonImage.BTN_START.width/8 && mouseX<=gameConstant.MAX_WIDTH/2+buttonImage.BTN_START.width/8 && mouseY>=gameConstant.MAX_HEIGHT/2-buttonImage.BTN_START.height/10 && mouseY<=gameConstant.MAX_HEIGHT/2+buttonImage.BTN_START.height/10;
+  return mouseX>=width/2-150 && mouseX<=width/2+150 && mouseY>=height/1.4-150 && mouseY<=height/1.4-75;
 }
 
 boolean isMouseInButtonSet(){
-  return mouseX>=gameConstant.MAX_WIDTH/2-buttonImage.BTN_START.width/8 && mouseX<=gameConstant.MAX_WIDTH/2+buttonImage.BTN_START.width/8 && mouseY>=gameConstant.MAX_HEIGHT/2-buttonImage.BTN_START.height/10+gameConstant.BUTTON_SPACE && mouseY<=gameConstant.MAX_HEIGHT/2+buttonImage.BTN_START.height/10+gameConstant.BUTTON_SPACE;
+  return mouseX>=width/2-150 && mouseX<=width/2+150 && mouseY>=height/1.4+75 && mouseY<=height/1.4+150;
 }

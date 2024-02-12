@@ -1,8 +1,8 @@
 abstract class FixedObject{
-  private PImage image;
-  private int curX;
-  private int curY;
-  private boolean isVisiable = false;
+  public PImage image;
+  public int curX;
+  public int curY;
+  public boolean isVisiable = false;
 
   public PImage getImage() {
     return image;
