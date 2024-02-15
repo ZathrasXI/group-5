@@ -21,7 +21,10 @@ void keyPressed(){
         helicopter.shoot();
       }
    }
-   if(key=='X'||key=='x'){
+   if(key=='X'||key=='x'&&gameStatus.curLevel==Level.LEVEL_MAP1){
      gameLevel1.lazor.isVisiable = true;
+   }
+   if(key=='q'||key=='Q'){
+     gameStatus.curLevel = Level.LEVEL_BEGIN;
    }
 }

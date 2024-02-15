@@ -15,11 +15,17 @@ void mouseClicked(){
       System.out.println("settag button is clicked");
       gameStatus.curLevel = Level.LEVEL_SET;
     }
+    if(isMouseInButtonLAN()){
+      gameStatus.curLevel = Level.LEVEL_LOGIN;
+      isLogin = true;
+    }
   }
   
   if(gameStatus.curLevel==Level.LEVEL_MAP1){
     
   }
+  
+  
   
   if(gameStatus.curLevel==Level.LEVEL_SET){
     System.out.println("start to set!");
@@ -71,6 +77,10 @@ void mouseClicked(){
       }
     }
   }
+}
+
+boolean isMouseInButtonLAN(){
+  return mouseX>=width/2-150 && mouseX<=width/2+150 && mouseY>=height/1.4-75 && mouseY<=height/1.4;
 }
 
 boolean isMouseInButtonStart(){

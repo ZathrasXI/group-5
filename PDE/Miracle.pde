@@ -1,5 +1,10 @@
 import gifAnimation.*;
 import ddf.minim.*;
+//Login UI
+GButton loginButton;
+LoginUnit loginUnit;
+boolean isLogin=false;
+
 //declaration of GameConstant
 GameConstant gameConstant;
 
@@ -38,7 +43,7 @@ SetPanel setPanel;
 //GameLevel1
 static GameLevel1 gameLevel1;
 
-void setup(){
+void setup(){  
   //init GameConstant
   gameConstant = new GameConstant(); 
   
@@ -101,10 +106,16 @@ void draw(){
     bgmStart(gameStatus.curLevel);
     setPanel.createPanel();
   }
-   if(gameStatus.curLevel == Level.LEVEL_MAP1){
+  if(gameStatus.curLevel == Level.LEVEL_MAP1){
     // play music
     bgmStart(gameStatus.curLevel);
     gameLevel1.startLevel1();
+  }
+  if(isLogin&&gameStatus.curLevel == Level.LEVEL_LOGIN){
+    // play music
+    bgmStart(Level.LEVEL_BEGIN);
+    //init loginUi
+    loginUnit = new LoginUnit(this);
   }
   
  

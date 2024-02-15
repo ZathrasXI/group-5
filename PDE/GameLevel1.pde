@@ -28,9 +28,9 @@ class GameLevel1 {
           image(map1.getImage(),map1.curX,map1.curY,width,height);
           //draw coins
           for(GoldCoin coin:coins){
-            if(helicopter.intersectWithCoin(coin)){
+            if(helicopter.intersectWithCoin(coin) && coin.isVisiable){
               coin.isVisiable = false;
-              scorePanel.goldCount++; //BUGGGG
+              scorePanel.goldCount++; 
             }
             if(coin.isVisiable){
               image(coin.getImage(),coin.curX,coin.curY,100,100);
@@ -119,7 +119,7 @@ class GameLevel1 {
     public void drawUfos(){
        for(Ufo ufo:ufos){
             for(Bullet bullet:helicopter.bullets){
-               if(bullet.isIntersectWithUfo(ufo)){
+               if(bullet.isIntersectWithUfo(ufo)&&ufo.isVisiable){
                  ufo.isVisiable = false;
                  ufo.move();
                  ufo.isVisiable = true;
