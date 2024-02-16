@@ -1,9 +1,7 @@
 import websockets.*;
 
-
+ArrayList<Client> clients = new ArrayList<Client>();
 WebsocketServer ws;
-String client;
-String client1;
 int now;
 
 void setup(){
@@ -18,7 +16,7 @@ void draw(){
   synchronized(this) {
     //Send message to all clients very 5 seconds
     if(millis()>now+100){
-      ws.sendMessage(client+" "+client1);
+      ws.sendMessageTo("hello",clients.get(0).uid);
       now=millis();
     }
   }
@@ -28,11 +26,28 @@ void draw(){
 
 void webSocketServerEvent(String msg){
   synchronized(this) {
-    if(msg.equals("hello from client1")){
-      client1 = msg;
-    }else{
-      client = msg;
+    JSONObject obj = new JSONObject();
+    String ip = obj.getString("ip");
+    
+    
+  }
+}
+
+public void webSocketConnectEvent(String uid, String ip) {
+  synchronized(this){
+    clients.add(new Client(uid,ip));
+    println("Someone connected", uid, ip);
+  }
+}
+  
+public void webSocketDisconnectEvent(String uid, String ip) {
+  println("Someone disconnected", uid, ip);
+  synchronized(this){
+    for(int i=0;i<clients.size();i++){
+      if(clients.get(i).uid==uid&&clients.get(i).ip==ip){
+        clients.remove(i);
+        return;
+      }
     }
-    println(msg);
   }
 }
