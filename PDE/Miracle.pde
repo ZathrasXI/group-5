@@ -4,7 +4,11 @@ import ddf.minim.*;
 //LAN BATTLE
 Client client;
 Player player2;
+Player player1;
+ProtocolDataFormat protocolDataFormat; 
 PApplet sketch = this;
+String msgFromServer;
+
 //time
 int now;
 
@@ -48,8 +52,9 @@ GameStatus gameStatus;
 //SetPanel
 SetPanel setPanel;
 
-//GameLevel1
+//GameLevel
 static GameLevel1 gameLevel1;
+static GameLevelLAN gameLevelLAN;
 
 void setup(){  
   //start record time
@@ -91,6 +96,7 @@ void setup(){
   
   //init gameLevel1
   gameLevel1 = new GameLevel1();
+  gameLevelLAN = new GameLevelLAN();
   
   //client
   client = new Client();
@@ -132,8 +138,11 @@ void draw(){
     loginUnit = new LoginUnit(this);
   }
   if(gameStatus.curLevel == Level.LEVEL_LANBATTLE){
+    gameLevelLAN.setPlayer2(player2);
+    if(player2!=null){
+      gameLevelLAN.startLevelLanBattle();
+    }
+    player1 = gameLevelLAN.player1;
     client.send();
-    GameLevelLAN gameLevelLAN = new GameLevelLAN();
-    gameLevelLAN.startLevelLanBattle();
   }
 }

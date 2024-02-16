@@ -1,4 +1,6 @@
 import websockets.*;
+import java.net.*;
+
 final class Client{
    WebsocketClient wsc;
    public Client(){
@@ -10,24 +12,43 @@ final class Client{
    }
    public void send(){
         if(millis()>now+100){
-          String str = "hello from client";
-          wsc.sendMessage(str);
+          ProtocolDataFormat protocolDataFormat = new ProtocolDataFormat();
+          protocolDataFormat.player = player1;
+          try{
+            InetAddress localhost = InetAddress.getLocalHost();
+            String ip = localhost.getHostAddress();
+            protocolDataFormat.ip = ip;
+          }catch (UnknownHostException e) {
+            e.printStackTrace();
+          }
+          JSONObject msgFromClient = protocolDataFormat.toJSONObject();
+          wsc.sendMessage(msgFromClient.toString());
         }
-        //println("send succese");
         now=millis();
    }
    
 }
 
    //This is an event like onMouseClicked. If you chose to use it, it will be executed whenever the server sends a message 
-    void webSocketEvent(String msg){
-        println(msg);
-      //JSONObject obj = JSONObject.parse(msg);
-      //JSONObject JSONtest = obj.getJSONObject("a");
-      //try{
-      //  int b = JSONtest.getInt("b");
-      //  println(b);
-      //}catch(Exception e){
-      //  e.printStackTrace();
-      //}
+    public void webSocketEvent(String msg){
+      synchronized(this){
+        try{
+        protocolDataFormat = msgToProtocolDataFormat(msg);
+        player2 = protocolDataFormat.player; 
+        }catch(Exception e){
+           e.printStackTrace();
+        }
+      }
     }
+    
+    ProtocolDataFormat msgToProtocolDataFormat(String msgFromServer){
+      JSONUtilizer tool = new JSONUtilizer();
+      ProtocolDataFormat protocolDataFormat = new ProtocolDataFormat();
+      JSONObject obj = JSONObject.parse(msgFromServer);
+      JSONObject player = obj.getJSONObject("player");
+      Player player2 = tool.JSONToPlayer(player);
+      protocolDataFormat.player = player2;
+      return protocolDataFormat;
+    }
+    
+    

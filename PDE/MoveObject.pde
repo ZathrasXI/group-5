@@ -19,7 +19,7 @@ abstract class MoveObject implements Serializable{
     obj.setBoolean("isVisiable",isVisiable);
     return obj;
   }
-
+  
   public void move(){
     prevX = curX;
     curX+=speed;

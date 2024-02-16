@@ -7,20 +7,18 @@ class GameLevelLAN{
   public final Map map1 = new Map("map1.png",0,0,2);
   public GameLevelLAN(){
       initPlayer1();
-      initPlayer2();
-      initPublicSource();
   }
   
   public void initPlayer1(){
       player1 = new Player();
   }
   
-  public void initPlayer2(){
-  
+  public void setPlayer2(Player player2){
+     this.player2 = player2;
   }
   
   public void initPublicSource(){
-  
+      
   }
   
     public void startLevelLanBattle(){

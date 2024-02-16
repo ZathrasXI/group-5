@@ -3,6 +3,10 @@ class Helicopter extends MoveObject implements Serializable{
   public ArrayList<Bullet>bullets;
   public int curBulletCount = 1000; //to do
   
+  public Helicopter(){
+  
+  }
+  
   public Helicopter(String imagePath,int curX,int curY,int health,int speed){
     this.curX = curX;
     this.curY = curY;
