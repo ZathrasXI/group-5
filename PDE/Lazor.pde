@@ -1,4 +1,4 @@
-class Lazor extends Ability{
+class Lazor extends Ability implements Serializable{
   public Lazor(){
     image = loadImage("lazor.png");
     speed = width;

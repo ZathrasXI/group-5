@@ -1,5 +1,13 @@
 import gifAnimation.*;
 import ddf.minim.*;
+
+//LAN BATTLE
+Client client;
+Player player2;
+PApplet sketch = this;
+//time
+int now;
+
 //Login UI
 GButton loginButton;
 LoginUnit loginUnit;
@@ -44,6 +52,9 @@ SetPanel setPanel;
 static GameLevel1 gameLevel1;
 
 void setup(){  
+  //start record time
+  now = millis();
+  
   //init GameConstant
   gameConstant = new GameConstant(); 
   
@@ -81,6 +92,9 @@ void setup(){
   //init gameLevel1
   gameLevel1 = new GameLevel1();
   
+  //client
+  client = new Client();
+  
   size(1125,630);
 }
 
@@ -117,8 +131,9 @@ void draw(){
     //init loginUi
     loginUnit = new LoginUnit(this);
   }
-  
- 
-  
-  
+  if(gameStatus.curLevel == Level.LEVEL_LANBATTLE){
+    client.send();
+    GameLevelLAN gameLevelLAN = new GameLevelLAN();
+    gameLevelLAN.startLevelLanBattle();
+  }
 }

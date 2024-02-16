@@ -1,4 +1,4 @@
-public class AbilityBox extends FixedObject{
+public class AbilityBox extends FixedObject implements Serializable{
    
    public AbilityBox(){
      PImage image = loadImage("abilityBox.png");

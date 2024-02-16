@@ -1,4 +1,4 @@
-class Helicopter extends MoveObject{
+class Helicopter extends MoveObject implements Serializable{
   public int health;
   public ArrayList<Bullet>bullets;
   public int curBulletCount = 1000; //to do

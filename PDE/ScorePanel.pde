@@ -1,4 +1,4 @@
-public class ScorePanel extends FixedObject{
+public class ScorePanel extends FixedObject implements Serializable{
    public int score;
    public int goldCount;
    public int time;

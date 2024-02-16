@@ -9,20 +9,21 @@ class LoginUnit {
       usernameField.setPromptText("Username");
       
       passwordField = new GTextField(gWindow, 100, 100, 200, 30);
-      passwordField.setPromptText("Password");
-      passwordField.setOpaque(true); // 设置密码框不透明
+      passwordField.setPromptText("Your message to another player");
+      passwordField.setOpaque(true);
       
       loginButton = new GButton(gWindow, 150, 150, 100, 40,"1");
-      loginButton.setText("Login");
+      loginButton.setText("connect");
       isLogin = false;
   }
 }
 
 void handleButtonEvents(GButton button, GEvent event){
   if(button==loginButton&&event == GEvent.CLICKED){
-    println("login!");
+    println("connect");
     loginUnit.gWindow.setVisible(false);
     loginUnit.gWindow.close();
-    gameStatus.curLevel = Level.LEVEL_BEGIN;
+    client.connect(sketch);
+    gameStatus.curLevel = Level.LEVEL_LANBATTLE;
   }
 }

@@ -1,11 +1,24 @@
-abstract class MoveObject{
-  public PImage image;
+import java.io.*;
+abstract class MoveObject implements Serializable{
+  public PImage image; //this field doesn't need to 
   public int curX;
   public int curY;
   public int prevX;
   public int prevY;
   public int speed;
   public boolean isVisiable = false;
+  
+  
+  public JSONObject toJSONObject(){
+    JSONObject obj = new JSONObject();
+    obj.setInt("curX",curX);
+    obj.setInt("curY",curY);
+    obj.setInt("prevX",prevX);
+    obj.setInt("prevY",prevY);
+    obj.setInt("speed",speed);
+    obj.setBoolean("isVisiable",isVisiable);
+    return obj;
+  }
 
   public void move(){
     prevX = curX;

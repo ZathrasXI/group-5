@@ -1,9 +1,18 @@
-abstract class FixedObject{
+abstract class FixedObject implements Serializable{
   public PImage image;
   public int curX;
   public int curY;
   public boolean isVisiable = false;
 
+    
+  public JSONObject toJSONObject(){
+    JSONObject obj = new JSONObject();
+    obj.setInt("curX",curX);
+    obj.setInt("curY",curY);
+    obj.setBoolean("isVisiable",isVisiable);
+    return obj;
+  }
+  
   public PImage getImage() {
     return image;
   }

@@ -25,6 +25,9 @@ void mouseClicked(){
     
   }
   
+  if(gameStatus.curLevel==Level.LEVEL_LANBATTLE){
+      
+  }
   
   
   if(gameStatus.curLevel==Level.LEVEL_SET){
