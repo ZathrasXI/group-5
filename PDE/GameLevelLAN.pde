@@ -10,7 +10,7 @@ class GameLevelLAN{
   }
   
   public void initPlayer1(){
-      player1 = new Player();
+      player1 = new Player1();
   }
   
   public void setPlayer2(Player player2){
@@ -40,24 +40,24 @@ class GameLevelLAN{
        }
        isGameAllEnd =  player1.isGameEnd&&player2.isGameEnd;
     }
-    public void drawCoins(){
-       for(GoldCoin coin:publicSource.coins){
-          if(player1.helicopter.intersectWithCoin(coin) && coin.isVisiable){
-              coin.isVisiable = false;
-              player1.scorePanel.goldCount++; 
-            }
-           if(coin.isVisiable){
-              image(coin.getImage(),coin.curX,coin.curY,100,100);
-           }
-           coin.move();
-          if(player2.helicopter.intersectWithCoin(coin) && coin.isVisiable){
-              coin.isVisiable = false;
-              player2.scorePanel.goldCount++; 
-            }
-           if(coin.isVisiable){
-              image(coin.getImage(),coin.curX,coin.curY,100,100);
-           }
-           coin.move();
-      }
-    }
+    //public void drawCoins(){
+    //   for(GoldCoin coin:publicSource.coins){
+    //      if(player1.helicopter.intersectWithCoin(coin) && coin.isVisiable){
+    //          coin.isVisiable = false;
+    //          player1.scorePanel.goldCount++; 
+    //        }
+    //       if(coin.isVisiable){
+    //          image(coin.getImage(),coin.curX,coin.curY,100,100);
+    //       }
+    //       coin.move();
+    //      if(player2.helicopter.intersectWithCoin(coin) && coin.isVisiable){
+    //          coin.isVisiable = false;
+    //          player2.scorePanel.goldCount++; 
+    //        }
+    //       if(coin.isVisiable){
+    //          image(coin.getImage(),coin.curX,coin.curY,100,100);
+    //       }
+    //       coin.move();
+    //  }
+    //}
 }

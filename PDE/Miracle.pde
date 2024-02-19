@@ -7,6 +7,7 @@ Player player2;
 Player player1;
 ProtocolDataFormat protocolDataFormat; 
 PApplet sketch = this;
+String ip;
 String msgFromServer;
 
 //time
@@ -100,6 +101,12 @@ void setup(){
   
   //client
   client = new Client();
+  try{
+     InetAddress localhost = InetAddress.getLocalHost();
+     ip = localhost.getHostAddress();
+  }catch (UnknownHostException e) {
+     e.printStackTrace();
+  }
   
   size(1125,630);
 }
@@ -138,11 +145,13 @@ void draw(){
     loginUnit = new LoginUnit(this);
   }
   if(gameStatus.curLevel == Level.LEVEL_LANBATTLE){
-    gameLevelLAN.setPlayer2(player2);
-    if(player2!=null){
+     if(player2!=null){
+      gameLevelLAN.setPlayer2(player2);
       gameLevelLAN.startLevelLanBattle();
     }
     player1 = gameLevelLAN.player1;
-    client.send();
+    if(client!=null){
+      client.send();
+    }
   }
 }

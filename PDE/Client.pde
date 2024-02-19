@@ -14,13 +14,7 @@ final class Client{
         if(millis()>now+100){
           ProtocolDataFormat protocolDataFormat = new ProtocolDataFormat();
           protocolDataFormat.player = player1;
-          try{
-            InetAddress localhost = InetAddress.getLocalHost();
-            String ip = localhost.getHostAddress();
-            protocolDataFormat.ip = ip;
-          }catch (UnknownHostException e) {
-            e.printStackTrace();
-          }
+          protocolDataFormat.ip = ip;
           JSONObject msgFromClient = protocolDataFormat.toJSONObject();
           wsc.sendMessage(msgFromClient.toString());
         }
@@ -32,8 +26,17 @@ final class Client{
    //This is an event like onMouseClicked. If you chose to use it, it will be executed whenever the server sends a message 
     public void webSocketEvent(String msg){
       synchronized(this){
+        println("getMessage from server");
         try{
-        protocolDataFormat = msgToProtocolDataFormat(msg);
+        String[] msgClients = msg.split(","); 
+        String msgFromAnotherClient = "";
+        for(String s:msgClients){
+          if(ip!=msgToProtocolDataFormat(s).ip){
+            msgFromAnotherClient = s;
+            break;
+          }
+        }
+        protocolDataFormat = msgToProtocolDataFormat(msgFromAnotherClient);
         player2 = protocolDataFormat.player; 
         }catch(Exception e){
            e.printStackTrace();
