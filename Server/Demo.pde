@@ -1,53 +1,56 @@
 import websockets.*;
-
-ArrayList<Client> clients = new ArrayList<Client>();
+import java.io.Serializable;
+ArrayList<Client> clients;
+HashMap<String,Client> map;
 WebsocketServer ws;
 int now;
 
 void setup(){
   size(200,200);
-  
+
   //Initiates the websocket server, and listens for incoming connections on ws://localhost:8025/john
+  clients = new ArrayList<Client>();
+  map = new HashMap<String,Client>();
   ws= new WebsocketServer(this,8025,"/john");
   now=millis();
+  println("wait for someone to connect");
 }
 
 void draw(){
   synchronized(this) {
-    //Send message to all clients very 5 seconds
+    //Send message to all clients very 1 seconds
     if(millis()>now+100){
-      ws.sendMessageTo("hello",clients.get(0).uid);
-      now=millis();
+       println("loop2");
+      if(clients!=null&&clients.size()==2){
+        StringBuffer msgFromServer = new StringBuffer();
+        if(clients.get(0)!=null){
+          msgFromServer.append(clients.get(0).msg);
+        }
+        msgFromServer.append(",");
+        if(clients.get(1)!=null){
+          msgFromServer.append(clients.get(1).msg);
+        }
+        String msg = msgFromServer.toString();
+        println("message from server is "+msg);
+        ws.sendMessage(msg);
+      }
     }
+    now=millis();
   }
 }
-
-//This is an event like onMouseClicked. If you chose to use it, it will be executed whenever a client sends a message
 
 void webSocketServerEvent(String msg){
   synchronized(this) {
-    JSONObject obj = new JSONObject();
+    println(msg);
+    JSONObject obj = parseJSONObject(msg);
     String ip = obj.getString("ip");
-    
-    
-  }
-}
-
-public void webSocketConnectEvent(String uid, String ip) {
-  synchronized(this){
-    clients.add(new Client(uid,ip));
-    println("Someone connected", uid, ip);
-  }
-}
-  
-public void webSocketDisconnectEvent(String uid, String ip) {
-  println("Someone disconnected", uid, ip);
-  synchronized(this){
-    for(int i=0;i<clients.size();i++){
-      if(clients.get(i).uid==uid&&clients.get(i).ip==ip){
-        clients.remove(i);
-        return;
-      }
+    println(ip);
+    if(clients!=null&&!map.containsKey(ip)&&clients.size()<=1){
+        Client client = new Client(ip,ip,msg);
+        clients.add(client);
+        map.put(ip,client);
+        println(clients.size());
     }
+    println("receive request from "+ip);
   }
 }
