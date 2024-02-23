@@ -1,6 +1,8 @@
 import gifAnimation.*;
 import ddf.minim.*;
 
+
+
 //LAN BATTLE
 Client client;
 Player player2;
@@ -129,9 +131,36 @@ void draw(){
     image(gameName,width/2,height/5,gameName.width,gameName.height);
   }
   if(gameStatus.curLevel == Level.LEVEL_SET){
-    // play music
-    bgmStart(gameStatus.curLevel);
+    //// play music
+    //bgmStart(gameStatus.curLevel);
     setPanel.createPanel();
+    if(mousePressed&&mouseX>=setPanel.volumePointerX-20&&mouseX-10<=setPanel.volumePointerX+80&&mouseY>=setPanel.volumePointerY-20&&mouseY<=setPanel.volumePointerY+40){
+      if(mouseX<400){
+        setPanel.volumePointerX = 400;
+      }
+      else if(mouseX>695){
+        setPanel.volumePointerX = 695;
+      }
+      else{
+         setPanel.volumePointerX = mouseX-40;
+      }
+      println("yes!");
+    }
+    
+    if(mousePressed&&mouseX>=setPanel.diffPointerX-20&&mouseX-10<=setPanel.diffPointerX+80&&mouseY>=setPanel.diffPointerY-20&&mouseY<=setPanel.diffPointerY+40){
+      if(mouseX<400){
+        setPanel.diffPointerX = 400;
+      }
+      else if(mouseX>695){
+        setPanel.diffPointerX = 695;
+      }
+      else{
+         setPanel.diffPointerX = mouseX-40;
+      }
+      println("yes!");
+    }
+    
+  println("setPanel.volumePointerX:"+setPanel.volumePointerX+",setPanel.volumePointerY:"+setPanel.volumePointerY);
   }
   if(gameStatus.curLevel == Level.LEVEL_MAP1){
     // play music

@@ -1,9 +1,10 @@
+
 class Ufo extends MoveObject{
    private int speedY = 5;
    public Ufo(){
      PImage image = loadImage("ufo.png");
-     this.setImage(image);
      speed = 15;
+     setImage(image);
    }
    @Override
     public void move(){

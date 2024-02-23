@@ -4,7 +4,7 @@ class Helicopter extends MoveObject implements Serializable{
   public int curBulletCount = 1000; //to do
   
   public Helicopter(){
-  
+
   }
   
   public Helicopter(String imagePath,int curX,int curY,int health,int speed){
@@ -13,6 +13,9 @@ class Helicopter extends MoveObject implements Serializable{
     this.health = health;
     this.speed = speed;
     this.bullets = new ArrayList<Bullet>(); 
+    images = new PImage[2];
+    String[] urls = {"spaceship.png","spaceship1.png"};
+    setImages(urls);
     image = loadImage(imagePath);
   }
   

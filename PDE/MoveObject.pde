@@ -1,6 +1,7 @@
 import java.io.*;
 abstract class MoveObject implements Serializable{
-  public PImage image; //this field doesn't need to 
+  public PImage image; 
+  public PImage[] images;
   public int curX;
   public int curY;
   public int prevX;
@@ -19,12 +20,22 @@ abstract class MoveObject implements Serializable{
     obj.setBoolean("isVisiable",isVisiable);
     return obj;
   }
-  
+    
   public void move(){
     prevX = curX;
     curX+=speed;
   };
 
+  public void drawAnimation(int x,int y,int imageWidth,int imageHeight,int delayTime){
+    //int now = millis();
+    for(int i=0;i<images.length;){
+      image(images[i],x,y,imageWidth,imageHeight);
+      //while(millis()-now<50){
+      //}
+      i++;
+    }
+  }
+  
   public PImage getImage() {
     return image;
   }
@@ -32,7 +43,17 @@ abstract class MoveObject implements Serializable{
   public void setImage(PImage image) {
     this.image = image;
   }
+  
+  public PImage[] getImages() {
+    return images;
+  }
 
+  public void setImages(String[] urls) {
+      for(int i=0;i<urls.length;i++){
+        images[i]=loadImage(urls[i]);
+      }
+  }
+  
   public int getCurX() {
     return curX;
   }
